@@ -1,0 +1,58 @@
+const Router = require('koa-router')
+const User = require('../models/users.js')
+const jwt = require('jsonwebtoken')
+
+const router = new Router()
+
+router.prefix('/auth')
+
+router.get('/', async function (ctx) {
+  ctx.body = 'Auth'
+})
+
+router.post('/login', async function (ctx) {
+  try {
+    const body = ctx.request.body
+    const found = await User.findOne({
+      username: body.username,
+      password: body.password
+    })
+    if (!found) {
+      ctx.status = 400
+      ctx.body = 'Not match found'
+    }
+    else {
+      ctx.status = 200
+      ctx.body = {
+        token: jwt.sign({
+          username: body.username
+        },
+        'mySuuuuuuuperSecretKey'
+        ),
+      message: 'OK'
+      }
+    }
+  } catch (err) {
+    console.log(err)
+    ctx.throw(400)
+  }
+})
+
+router.post('/register', async function (ctx) {
+  try {
+    const body = ctx.request.body
+    const user = new User({
+      username: body.username,
+      password: body.password
+    })
+    const exists = await User.findOne({ username: body.username })
+    if (exists) throw Error('User already exists')
+    await user.save()
+    ctx.body = 'OK'
+  } catch (err) {
+    console.log(err)
+    ctx.throw(400)
+  }
+})
+
+module.exports = router
