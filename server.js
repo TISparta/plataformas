@@ -6,16 +6,6 @@ const routes = require('./routes/index')
 const app = new Koa()
 app.use(bodyParser())
 
-/*const Router = require('koa-router')
-const router = new Router()
-router.prefix('/')
-
-router.get('/', async function (ctx) {
-  ctx.body = 'Hello World'
-})
-
-app.use(router.routes())*/
-
 mongoose.connect('mongodb://localhost/plataformas', { useNewUrlParser: true });
 mongoose.connection.on('error', console.error);
 
