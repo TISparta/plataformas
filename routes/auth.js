@@ -42,6 +42,7 @@ router.post('/register', async function (ctx) {
   try {
     const body = ctx.request.body
     const user = new User({
+      name: body.name,
       username: body.username,
       password: body.password
     })
