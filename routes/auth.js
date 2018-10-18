@@ -27,9 +27,10 @@ router.post('/login', async function (ctx) {
         token: jwt.sign({
           username: body.username
         },
-        'mySuuuuuuuperSecretKey'
-        ),
-      message: 'OK'
+        'mySuuuuuuuperSecretKey', {
+          expiresIn: '1d'
+        }),
+        message: 'OK'
       }
     }
   } catch (err) {

@@ -1,20 +1,37 @@
-const Koa = require('koa')
+const koa = require('koa')
+const cors = require('@koa/cors')
 const bodyParser = require('koa-bodyparser')
+const helmet = require('koa-helmet')
+const respond = require('koa-respond')
 const mongoose = require('mongoose')
 const routes = require('./routes/index')
 
-const app = new Koa()
-app.use(bodyParser())
+const app = new koa()
 
-mongoose.connect('mongodb://localhost/plataformas', { useNewUrlParser: true });
-mongoose.connection.on('error', console.error);
+app.use(helmet())
+app.use(cors())
+app.use(bodyParser({
+  enableTypes: ['json'],
+  jsonLimit: '5mb',
+  strict: true,
+  onerror: function (err, ctx) {
+    ctx.throw('Body parse error', 422)
+  }
+}))
+
+app.use(respond())
+app.use(async (ctx, next) => {
+//  ctx.set('Access-Control-Allow-Credentials', true)
+  ctx.set('Access-Control-Allow-Origin', '*')
+  ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
+  await next();
+})
 
 routes(app)
 
-if (!module.parent) {
-  const PORT = process.env.PORT || 3000
-  console.log(`Running in port ${PORT}`)
-  app.listen(PORT)
-}
+mongoose.connect('mongodb://localhost/plataformas', { useNewUrlParser: true });
+mongoose.connection.on('error', console.error);
+mongoose.connection.once('open', () => console.log('Database connected'))
 
 module.exports = app

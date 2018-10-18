@@ -1,6 +1,7 @@
 const auth = require('./auth')
 const products = require('./products')
 const Router = require('koa-router')
+const cors = require('@koa/cors')
 
 const router = new Router()
 router.prefix('/')

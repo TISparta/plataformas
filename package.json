@@ -4,17 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server",
-    "prod": "node server"
+    "dev": "nodemon index",
+    "prod": "node index"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@koa/cors": "^2.2.2",
     "jsonwebtoken": "^8.3.0",
     "koa": "^2.5.3",
     "koa-body": "^4.0.4",
     "koa-bodyparser": "^4.2.1",
+    "koa-helmet": "^4.0.0",
     "koa-jwt": "^3.5.1",
+    "koa-respond": "^2.1.0",
     "koa-route": "^3.2.0",
     "koa-router": "^7.4.0",
     "mongoose": "^5.3.2",
