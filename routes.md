@@ -56,3 +56,47 @@ Donde token es lo recibido en la ruta para logearse
 ```json
 Products
 ```
+
+### Para obtener la lista de cartas
+* METHOD: GET
+* URL: http://localhost:3000/products/list
+* EXPECTED RESPONSE:
+```json
+[
+    {
+        "description": "Hola",
+        "attack": 15,
+        "defense": 20,
+        "_id": "5bcdf7118d9299284e5f08da",
+        "cardName": "fdf",
+        "url": "file:///home/tisparta/images/upload_261e30ec8369f358dcd63836f38f830f.jpg",
+        "__v": 0,
+        "id": "5bcdf7118d9299284e5f08da"
+    },
+    {
+        "description": "Hola",
+        "attack": 15,
+        "defense": 20,
+        "_id": "5bcdf796d7f21128b9b50bad",
+        "cardName": "fdf",
+        "url": "file:///home/tisparta/images/upload_b16dacb528c2ec0e53d73a2c42a9cf02.png",
+        "__v": 0,
+        "id": "5bcdf796d7f21128b9b50bad"
+    },
+    {
+        "description": "Hola",
+        "attack": 15,
+        "defense": 20,
+        "_id": "5bcdf79dd7f21128b9b50bae",
+        "cardName": "fdf",
+        "url": "file:///home/tisparta/images/upload_161231af8cb662ffb04ee24659671cf8.png",
+        "__v": 0,
+        "id": "5bcdf79dd7f21128b9b50bae"
+    }
+]
+```
+
+### Para agregar una carta
+* METHOD: POST
+* URL: http://localhost:3000/products/add
+* Example: Check index.html in this repo

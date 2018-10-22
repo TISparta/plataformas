@@ -21,7 +21,6 @@ app.use(bodyParser({
 
 app.use(respond())
 app.use(async (ctx, next) => {
-//  ctx.set('Access-Control-Allow-Credentials', true)
   ctx.set('Access-Control-Allow-Origin', '*')
   ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
@@ -30,7 +29,7 @@ app.use(async (ctx, next) => {
 
 routes(app)
 
-mongoose.connect('mongodb://localhost/plataformas', { useNewUrlParser: true });
+mongoose.connect(process.env.DB_URI, { useNewUrlParser: true });
 mongoose.connection.on('error', console.error);
 mongoose.connection.once('open', () => console.log('Database connected'))
 

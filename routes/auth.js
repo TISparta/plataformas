@@ -27,7 +27,7 @@ router.post('/login', async function (ctx) {
         token: jwt.sign({
           username: body.username
         },
-        'mySuuuuuuuperSecretKey', {
+        process.env.SECRET, {
           expiresIn: '1d'
         }),
         message: 'OK'
