@@ -5,6 +5,7 @@ const helmet = require('koa-helmet')
 const respond = require('koa-respond')
 const mongoose = require('mongoose')
 const routes = require('./routes/index')
+const serve = require('koa-static')
 
 const app = new koa()
 
@@ -27,6 +28,7 @@ app.use(async (ctx, next) => {
   await next();
 })
 
+app.use(serve('./public'))
 routes(app)
 
 mongoose.connect(process.env.DB_URI, { useNewUrlParser: true });
