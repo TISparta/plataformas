@@ -23,11 +23,11 @@ const productSchema = new mongoose.Schema({
     type: Number,
     default: -1,
     require: false
-  }/*,
-  userId: {
+  },
+  username: {
     type: mongoose.Schema.Types.ObjectId,
     required: true
-  }*/
+  }
 }, {
   toJSON: {
     virtuals: true

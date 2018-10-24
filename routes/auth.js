@@ -1,6 +1,7 @@
 const Router = require('koa-router')
 const User = require('../models/users.js')
-const jwt = require('jsonwebtoken')
+const jwtToken = require('jsonwebtoken')
+const jwt = require('koa-jwt')
 
 const router = new Router()
 
@@ -24,7 +25,7 @@ router.post('/login', async function (ctx) {
     else {
       ctx.status = 200
       ctx.body = {
-        token: jwt.sign({
+        token: jwtToken.sign({
           username: body.username
         },
         process.env.SECRET, {
@@ -54,6 +55,16 @@ router.post('/register', async function (ctx) {
   } catch (err) {
     console.log(err)
     ctx.throw(400)
+  }
+})
+
+router.use(jwt({
+  secret: process.env.SECRET 
+}))
+
+router.get('/user', async function (ctx) {
+  ctx.body = {
+    username: ctx.state.user.username
   }
 })
 

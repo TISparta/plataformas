@@ -6,9 +6,9 @@ const koaBody = require('koa-body')
 
 const router = new Router()
 
-/*router.use(jwt({
+router.use(jwt({
   secret: process.env.SECRET 
-}))*/
+}))
 
 // Estas rutas necesitas un header
 // Authorization: Bearer <token>
@@ -32,11 +32,12 @@ router.post('/add', koaBody({
   multipart: true,
   urlencoded: true
 }), async (ctx) => {
+  let username = ctx.state.user.username
   let file = ctx.request.files.imgUploader
   let fileName = file.path.slice(file.path.lastIndexOf('/') + 1)
   let add = ctx.request.body
   add['url'] = process.env.IMG_URL + fileName
-  console.log(add)
+  add['username'] = username
   const newProduct = await Product(add)
   await newProduct.save()
   ctx.body = 'OK'
