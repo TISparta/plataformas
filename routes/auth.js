@@ -26,10 +26,11 @@ router.post('/login', async function (ctx) {
       ctx.status = 200
       ctx.body = {
         token: jwtToken.sign({
+          name: body.name,
           username: body.username
         },
         process.env.SECRET, {
-          expiresIn: '1d'
+          expiresIn: '100d'
         }),
         message: 'OK'
       }
@@ -64,6 +65,7 @@ router.use(jwt({
 
 router.get('/user', async function (ctx) {
   ctx.body = {
+    name: ctx.state.user.name,
     username: ctx.state.user.username
   }
 })

@@ -22,10 +22,15 @@ const productSchema = new mongoose.Schema({
   defense: {
     type: Number,
     default: -1,
-    require: false
+    required: false
   },
   username: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    default: 0,
     required: true
   }
 }, {
