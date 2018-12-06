@@ -100,3 +100,43 @@ Products
 * METHOD: POST
 * URL: http://localhost:3000/products/add
 * Example: Check index.html in this repo
+
+### Para eliminar una carta
+
+* METHOD: POST
+* URL: http://localhost:3000/products/delete
+* BODY:
+```json
+{
+  "_id": "5bd60a803273131152cd0bcd"
+}
+```
+* EXPECTED RESPONSE:
+```json
+OK
+```
+
+### Para actualizar info de una carta
+
+* METHOD: POST
+* URL: http://localhost:3000/products/update
+* BODY:
+```json
+{
+    "description": "Whatever",
+    "attack": 100,
+    "defense": 300,
+    "price": 300,
+    "_id": "5bd60a803273131152cd0bcd",
+    "cardName": "Gil",
+    "url": "file:///home/tisparta/images/upload_19aee28b9d1eb7c47ee7c3a21199ac54.png",
+    "username": "jose",
+    "__v": 0,
+    "id": "5bd60a803273131152cd0bcd"
+}
+```
+* EXPECTED RESPONSE:
+```json
+OK
+```
+

@@ -23,11 +23,12 @@ router.post('/login', async function (ctx) {
       ctx.body = 'Not match found'
     }
     else {
+      console.log(found)
       ctx.status = 200
       ctx.body = {
         token: jwtToken.sign({
-          name: body.name,
-          username: body.username
+          name: found.name,
+          username: found.username
         },
         process.env.SECRET, {
           expiresIn: '100d'

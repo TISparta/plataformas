@@ -43,4 +43,20 @@ router.post('/add', koaBody({
   ctx.body = 'OK'
 })
 
+router.post('/delete', async function (ctx) {
+  const body = ctx.request.body
+  await Product.deleteOne({_id: body._id}, function (err, res) {
+    if (err) ctx.body = 'Could not delete the image'
+    else ctx.body = 'OK'
+  })
+})
+
+router.post('/update', async function (ctx) {
+  const body = ctx.request.body
+  await Product.updateOne({_id: body._id}, body, function (err, res) {
+    if (err) ctx.body = 'Something got wrong'
+    else ctx.body = 'OK'
+  })
+})
+
 module.exports = router
